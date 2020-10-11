@@ -1,11 +1,5 @@
 public interface Polynomial extends Iterable<Term> {
 
-	public String getString();
-
-	public int getSize();
-
-	public Term getElement(int i );
-
 	public Polynomial add(Polynomial P2);
 	
 	public Polynomial subtract(Polynomial P2);

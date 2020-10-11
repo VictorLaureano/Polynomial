@@ -24,7 +24,7 @@ public class PolynomialImp implements Polynomial{
         }
 
 
-    }
+    }//My methods
     private Polynomial sumElements(){
         for(int i = 0;i<this.elements.size();i++) {
             for (int j = i; j < this.elements.size(); j++) {
@@ -66,10 +66,6 @@ public class PolynomialImp implements Polynomial{
         }return false;
 
     }
-    @Override
-    public String getString(){
-        return polynomial;
-    }
     public String toString(ArrayList<Term> P){
         String x = "x";
         String xponent = "x^";
@@ -95,16 +91,6 @@ public class PolynomialImp implements Polynomial{
 
         } return base;
     }
-
-    @Override
-    public int getSize(){
-        return this.elements.size();
-    }
-    @Override
-    public Term getElement(int i){
-        return this.elements.get(i);
-    }
-
     private boolean termMember(ArrayList<Term> P){
         for(int i = 0;i<this.elements.size();i++){
             for(int j = 0; j<P.size();j++){
