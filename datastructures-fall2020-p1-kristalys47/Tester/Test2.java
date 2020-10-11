@@ -32,7 +32,7 @@ public class Test2 {
 	public void testSubtract() {
 		Polynomial P3 = P1.subtract(P2);
 		Polynomial P4 = new PolynomialImp("2x^2+2x+-1");
-		System.out.printf("Subtract I-> P3: %s, P4: %s\n", P3, P4);
+		System.out.printf("Subtract I-> P3: %s, P4: %s\n", P3.getString(), P4.getString());
 		assertTrue(P3.equals(P4));
 		
 		P3 = P1.subtract(P1);

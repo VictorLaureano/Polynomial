@@ -25,6 +25,16 @@ public class PolynomialImp implements Polynomial{
 
 
     }
+    private Polynomial sumElements(){
+        for(int i = 0;i<this.elements.size();i++) {
+            for (int j = i; j < this.elements.size(); j++) {
+                if ((this.elements.get(i).getExponent() == this.elements.get(j).getExponent())) {
+                    this.elements.replace(i,new TermImp(this.elements.get(i).getCoefficient() + this.elements.get(j).getCoefficient(),this.elements.get(i).getExponent()));
+            }
+        }
+
+    }  return this;
+}
     private void polytoArray(String s){
         String terms[] = s.split("\\+|\\s");
         this.elements = new ArrayList<>();
@@ -94,43 +104,44 @@ public class PolynomialImp implements Polynomial{
     public Term getElement(int i){
         return this.elements.get(i);
     }
+
+    private boolean termMember(ArrayList<Term> P){
+        for(int i = 0;i<this.elements.size();i++){
+            for(int j = 0; j<P.size();j++){
+                if(this.elements.get(i).getExponent() == P.get(i).getExponent()){
+                    return true;
+                }
+            }
+        } return false;
+    }
     @Override
     public Polynomial add(Polynomial P2) {
         ArrayList<Term> newPoly = new ArrayList<>();
-        ArrayList<Term> target = new ArrayList<>();
         PolynomialImp P = (PolynomialImp) P2;
-        ArrayList<Term> temp = new ArrayList<>();
 
-        for(int i=0;i<P.getSize();i++){
-            temp.add(P.elements.get(i));
 
-        }
-        for(int i=0;i<this.getSize();i++){
-            newPoly.add(this.elements.get(i));
-            target.add(this.elements.get(i));
 
-        }
-
-        for(int i =0;i<target.size();i++){
-            for(int j=0;j<P.getSize();j++){
-                if((target.get(i).getExponent()==P.elements.get(j).getExponent())){
-                    if(((target.get(i).getCoefficient()+P.elements.get(j).getCoefficient())!=0)){
-                        newPoly.replace(i, new TermImp(target.get(i).getCoefficient() + P.elements.get(j).getCoefficient(), this.elements.get(i).getExponent()));
-                        temp.remove(P.elements.get(j));
+        for(int i = 0 ; i<this.elements.size();i++){
+            if(P.exponentFinder(this.elements.get(i).getExponent())) {
+                for (int j = 0; j < P.elements.size(); j++) {
+                    if (this.exponentFinder(P.elements.get(j).getExponent())) {
+                        if ((this.elements.get(i).getExponent() == P.elements.get(j).getExponent())) {
+                            if (((this.elements.get(i).getCoefficient() + P.elements.get(j).getCoefficient()) != 0)) {
+                                newPoly.add(new TermImp(this.elements.get(i).getCoefficient() + P.elements.get(j).getCoefficient(), this.elements.get(i).getExponent()));
+                            }
+                        }
                     }else{
-                        newPoly.remove(i);
-                        target.remove(i);
-                        temp.remove(j);
-
-                    }
+                        if(!newPoly.isMember(P.elements.get(j))) {
+                            newPoly.add(P.elements.get(j));
+                        }
 
                     }
                 }
-            }
-        for(int i =0; i<temp.size();i++){
-            newPoly.add(temp.get(i));
-        }
 
+            } else {
+                newPoly.add(this.elements.get(i));
+            }
+        }
 
         PolynomialImp result = new PolynomialImp(toString(newPoly));
         return result;
@@ -140,18 +151,55 @@ public class PolynomialImp implements Polynomial{
     public Polynomial subtract(Polynomial P2) {
         ArrayList<Term> newPoly = new ArrayList<>();
         PolynomialImp P = (PolynomialImp) P2;
-        for (int i = 0; i < this.size;i++){
-            for(int j = 0; j<P.size;j++){
-                if(this.elements.get(i).getExponent()==P.elements.get(j).getExponent()){
-                    newPoly.add(new TermImp(this.elements.get(i).getCoefficient() - P.elements.get(j).getCoefficient(), this.elements.get(i).getExponent()));
-                }
+
+        for(int i = 0 ; i<P.elements.size();i++){
+            if(P.elements.get(i).getCoefficient()>0){
+                P.elements.replace(i, new TermImp(-P.elements.get(i).getCoefficient(),P.elements.get(i).getExponent()));
+            }else{
+                P.elements.replace(i, new TermImp(Math.abs(P.elements.get(i).getCoefficient()),P.elements.get(i).getExponent()));
             }
         }
-        return new PolynomialImp(this.toString(newPoly));
+
+
+        for(int i = 0 ; i<this.elements.size();i++){
+            if(P.exponentFinder(this.elements.get(i).getExponent())) {
+                for (int j = 0; j < P.elements.size(); j++) {
+                    if (this.exponentFinder(P.elements.get(j).getExponent())) {
+                        if ((this.elements.get(i).getExponent() == P.elements.get(j).getExponent())) {
+                            if (((this.elements.get(i).getCoefficient() + P.elements.get(j).getCoefficient()) != 0)) {
+                                newPoly.add(new TermImp(this.elements.get(i).getCoefficient() + P.elements.get(j).getCoefficient(), this.elements.get(i).getExponent()));
+                            }
+                        }
+                    }else{
+                        if(!newPoly.isMember(P.elements.get(j))) {
+                            newPoly.add(P.elements.get(j));
+                        }
+
+                    }
+                }
+
+            } else {
+                newPoly.add(this.elements.get(i));
+            }
+        }
+
+
+        PolynomialImp result = new PolynomialImp(toString(newPoly));
+        return result;
     }
+
     @Override
     public Polynomial multiply(Polynomial P2) {
-        return null;
+        ArrayList<Term> newPoly = new ArrayList<>();
+        PolynomialImp P = (PolynomialImp) P2;
+
+        for(int i = 0; i<this.elements.size();i++){
+            for(int j =0 ; j < P.elements.size();j++){
+                newPoly.add(new TermImp(this.elements.get(i).getCoefficient() * P.elements.get(j).getCoefficient(), this.elements.get(i).getExponent() + P.elements.get(j).getExponent()));
+            }
+        }
+        PolynomialImp result = new PolynomialImp(toString(newPoly));
+        return result.sumElements();
     }
 
     @Override

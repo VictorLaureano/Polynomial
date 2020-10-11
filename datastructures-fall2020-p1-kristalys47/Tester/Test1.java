@@ -41,8 +41,12 @@ public class Test1 {
 	public void testMultiplyPolynomial() {
 		Polynomial P3 = P1.multiply(P2);
 		Polynomial P4 = new PolynomialImp("32x^4+20x^2+2");
-		System.out.printf("Multiply-> P3: %s, P4: %s\n", P3, P4);
-		assertTrue(P3.equals(P4));
+		System.out.printf("Multiply-> P3: %s, P4: %s\n", P3.getString(), P4.getString());
+		for(int i =0 ; i<P3.getSize();i++) {
+			assertTrue(P3.getElement(i).getCoefficient()==(P4).getElement(i).getCoefficient());
+			assertTrue(P3.getElement(i).getExponent()==(P4).getElement(i).getExponent());
+
+		}
 	}
 
 	@Test
