@@ -112,7 +112,7 @@ public class PolynomialImp implements Polynomial{
         for(int i = 0 ; i<P.size();i++){
             int index =0;
             if(isUnique(P.get(i).getExponent(),result)){
-                while(result.get(index).getExponent()>P.get(i).getExponent()){
+                while( index< result.size() && result.get(index).getExponent()>P.get(i).getExponent()){
                     index++;
                 }
                 result.add(new TermImp(P.get(i).getCoefficient() , P.get(i).getExponent()),index);
@@ -167,9 +167,9 @@ public class PolynomialImp implements Polynomial{
             }else{
                 if(P.get(i).getExponent()>1){
                     base += "+" + P.get(i).getCoefficient() + xponent + P.get(i).getExponent();
-                }if(P.get(i).getExponent()==1){
+                }else if(P.get(i).getExponent()==1){
                     base += "+" + P.get(i).getCoefficient() + x;
-                }else{
+                }else if (P.get(i).getExponent()==0){
                     base += "+" + P.get(i).getCoefficient();
                 }
             }
