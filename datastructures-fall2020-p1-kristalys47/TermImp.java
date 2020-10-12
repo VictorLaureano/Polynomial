@@ -1,4 +1,3 @@
-
 public class TermImp implements Term{
     public double coefficient;
     public int exponent;
