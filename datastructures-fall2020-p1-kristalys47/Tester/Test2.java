@@ -48,9 +48,12 @@ public class Test2 {
 	public void testMultiplyPolynomial() {
 		Polynomial P3 = P1.multiply(P2);
 		Polynomial P4 = new PolynomialImp("3x^4+2x^3+7x^2+4x+2");
-		System.out.printf("Multiply-> P3: %s, P4: %s\n", P3, P4);
-		assertTrue(P3.equals(P4));
-	}
+		System.out.printf("Multiply-> P3: %s, P4: %s\n", P3.getString(), P4.getString());
+		for(int i =0 ; i<P3.getSize();i++) {
+			assertTrue(P3.getElement(i).getCoefficient()==(P4).getElement(i).getCoefficient());
+			assertTrue(P3.getElement(i).getExponent()==(P4).getElement(i).getExponent());
+
+		}	}
 
 	@Test
 	public void testDerivative() {

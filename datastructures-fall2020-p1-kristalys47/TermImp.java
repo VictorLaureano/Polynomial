@@ -23,7 +23,7 @@ public class TermImp implements Term{
 
     @Override
     public double evaluate(double x) {
-        return (getCoefficient()*Math.pow(x,getExponent()));
+        return (this.getCoefficient()*Math.pow(x,this.getExponent()));
     }
 
     @Override

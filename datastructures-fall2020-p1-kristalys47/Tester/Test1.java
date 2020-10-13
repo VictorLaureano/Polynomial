@@ -32,7 +32,7 @@ public class Test1 {
 	@Test
 	public void testSubtract() {
 		Polynomial P3 = P1.subtract(P2);
-		Polynomial P4 = new PolynomialImp("4x^2+-1");
+		Polynomial P4 = new PolynomialImp("4.0x^2+-1.0");
 		System.out.printf("Subtract-> P3: %s, P4: %s\n", P3.getString(), P4.getString());
 		assertTrue(P3.equals(P4));
 	}
@@ -53,8 +53,12 @@ public class Test1 {
 	public void testDerivative() {
 		Polynomial P3 = P1.derivative();
 		Polynomial P4 = new PolynomialImp("16x");
-		System.out.printf("Derivative-> P3: %s, P4: %s\n", P3, P4);
-		assertTrue(P3.equals(P4));
+		System.out.printf("Derivative-> P3: %s, P4: %s\n", P3.getString(), P4.getString());
+		for(int i =0 ; i<P3.getSize();i++) {
+			assertTrue(P3.getElement(i).getCoefficient()==(P4).getElement(i).getCoefficient());
+			assertTrue(P3.getElement(i).getExponent()==(P4).getElement(i).getExponent());
+
+		}
 
 	}
 
@@ -64,8 +68,12 @@ public class Test1 {
 		double c1 = 4/3.0;
 		String strP4 = c1 + "x^3+2x+1";
 		Polynomial P4 = new PolynomialImp(strP4);
-		System.out.printf("Indefinite Integral-> P3: %s, P4: %s\n", P3, P4);
-		assertTrue(P3.equals(P4));
+		System.out.printf("Indefinite Integral-> P3: %s, P4: %s\n", P3.getString(), P4.getString());
+		for(int i =0 ; i<P3.getSize();i++) {
+			assertTrue(P3.getElement(i).getCoefficient()==(P4).getElement(i).getCoefficient());
+			assertTrue(P3.getElement(i).getExponent()==(P4).getElement(i).getExponent());
+
+		}
 
 	}
 
@@ -98,9 +106,13 @@ public class Test1 {
 	@Test
 	public void testMultiplyDouble() {
 		Polynomial P3 = P1.multiply(2);
-		Polynomial P4 = new PolynomialImp("16x^2+2");
-		System.out.printf("Multiply-> P3: %s, P4: %s\n", P3, P4);
-		assertTrue(P3.equals(P4));
+		Polynomial P4 = new PolynomialImp("16.0x^2+2.0");
+		System.out.printf("Multiply-> P3: %s, P4: %s\n", P3.getString(), P4.getString());
+		for(int i =0 ; i<P3.getSize();i++) {
+			assertTrue(P3.getElement(i).getCoefficient()==(P4).getElement(i).getCoefficient());
+			assertTrue(P3.getElement(i).getExponent()==(P4).getElement(i).getExponent());
+
+		}
 	}
 
 	@Test

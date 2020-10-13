@@ -41,7 +41,7 @@ public class Test3 {
 		}
 		
 		P3 = new PolynomialImp("0").subtract(P1);
-		P4 = new PolynomialImp("-2x^2+4x+-10");
+		P4 = new PolynomialImp("-2.0x^2+4.0x+-10.0");
 		System.out.printf("Subtract II-> P3: %s, P4: %s\n", P3, P4);
 		for(int i =0 ; i<P3.getSize();i++) {
 			assertTrue(P3.getElement(i).getCoefficient()==(P4).getElement(i).getCoefficient());
@@ -55,7 +55,7 @@ public class Test3 {
 	@Test
 	public void testMultiplyPolynomial() {
 		Polynomial P3 = P1.multiply(P2);
-		Polynomial P4 = new PolynomialImp("8x^5+-20x^4+58x^3+-34x^2+38x+30");
+		Polynomial P4 = new PolynomialImp("8.0x^5+-20.0x^4+58.0x^3+-34.0x^2+38.0x+30.0");
 		System.out.printf("Multiply 1-> P3: %s, P4: %s\n", P3.getString(), P4.getString());
 		for(int i =0 ; i<P3.getSize();i++) {
 			assertTrue(P3.getElement(i).getCoefficient()==(P4).getElement(i).getCoefficient());
@@ -92,8 +92,8 @@ public class Test3 {
 		double c1 = -2.0/3.0, c2=5.0/2.0;
 		String strP4 = "x^4+" + c1 + "x^3+" + c2 + "x^2+3x+1";
 		Polynomial P4 = new PolynomialImp(strP4);
-		System.out.printf("Indefinite Integral-> P3: %s, P4: %s\n", P3, P4);
-		for(int i =0 ; i<P3.getSize();i++) {
+		System.out.printf("Indefinite Integral-> P3: %s, P4: %s\n", P3.getString(), P4.getString());
+		for(int i =0 ; i<P4.getSize();i++) {
 			assertTrue(P3.getElement(i).getCoefficient()==(P4).getElement(i).getCoefficient());
 			assertTrue(P3.getElement(i).getExponent()==(P4).getElement(i).getExponent());
 
