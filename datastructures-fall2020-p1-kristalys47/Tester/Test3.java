@@ -104,8 +104,10 @@ public class Test3 {
 	@Test
 	public void testDefiniteIntegral() {
 		double number1 = P1.definiteIntegral(2, 9);
+		Polynomial P5 = P1.indefiniteIntegral();
 		double number2 = 396.666667;
 		System.out.printf("Definite Integral-> number1: %f, number2: %f\n", number1, number2);
+		System.out.println(P5.getString());
 		double delta = Math.abs(number1 - number2);
 		assertTrue(delta < EPSILON);
 	}
@@ -132,7 +134,11 @@ public class Test3 {
 		Polynomial P3 = P1.multiply(-5);
 		Polynomial P4 = new PolynomialImp("-10x^2+20x+-50");
 		System.out.printf("Multiply -> P3: %s, P4: %s\n", P3, P4);
-		assertTrue(P3.equals(P4));
+		for(int i =0 ; i<P3.getSize();i++) {
+			assertTrue(P3.getElement(i).getCoefficient()==(P4).getElement(i).getCoefficient());
+			assertTrue(P3.getElement(i).getExponent()==(P4).getElement(i).getExponent());
+
+		}
 	}
 
 	@Test

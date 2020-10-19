@@ -1,5 +1,7 @@
 public interface Polynomial extends Iterable<Term> {
 
+	public String toString();
+
 	public String getString();
 
 	public Term getElement(int i);

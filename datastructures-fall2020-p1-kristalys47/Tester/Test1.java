@@ -12,15 +12,15 @@ public class Test1 {
 
 	@Before
 	public void setUp() throws Exception {
-		 P1 = new PolynomialImp("8.0x^2+1.0");
-		 P2 = new PolynomialImp("4.0x^2+2.0");
+		 P1 = new PolynomialImp("8x^2+1");
+		 P2 = new PolynomialImp("4x^2+2");
 
 	}
 
 	@Test
 	public void testAdd() {
 		Polynomial P3 = P1.add(P2);
-		Polynomial P4 = new PolynomialImp("12.0x^2+3.0");
+		Polynomial P4 = new PolynomialImp("12x^2+3");
 		System.out.printf("Add-> P3: %s, P4: %s\n", P3.getString() , P4.getString());
 		for(int i =0 ; i<P3.getSize();i++) {
 			assertTrue(P3.getElement(i).getCoefficient()==(P4).getElement(i).getCoefficient());
@@ -34,7 +34,11 @@ public class Test1 {
 		Polynomial P3 = P1.subtract(P2);
 		Polynomial P4 = new PolynomialImp("4.0x^2+-1.0");
 		System.out.printf("Subtract-> P3: %s, P4: %s\n", P3.getString(), P4.getString());
-		assertTrue(P3.equals(P4));
+		for(int i =0 ; i<P3.getSize();i++) {
+			assertTrue(P3.getElement(i).getCoefficient()==(P4).getElement(i).getCoefficient());
+			assertTrue(P3.getElement(i).getExponent()==(P4).getElement(i).getExponent());
+
+		}
 	}
 
 	@Test
