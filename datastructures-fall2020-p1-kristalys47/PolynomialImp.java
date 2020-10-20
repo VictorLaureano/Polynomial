@@ -132,16 +132,17 @@ public class PolynomialImp implements Polynomial {
         String x = "x";
         String xponent = "x^";
         String base = "";
-        if (P.get(0).getExponent() > 1) {
-            base += P.get(0).getCoefficient() + xponent + P.get(0).getExponent();
-        }
-        else if (P.get(0).getExponent() == 1) {
-            base += P.get(0).getCoefficient() + x;
-        }
-        else if (P.get(0).getExponent() == 0) {
-            base += P.get(0).getCoefficient();
-        }
-        for(int i = 1; i < P.size(); i++) {
+
+        for(int i = 0; i < P.size(); i++) {
+            if(i==0) {
+                if (P.get(0).getExponent() > 1) {
+                    base += P.get(0).getCoefficient() + xponent + P.get(0).getExponent();
+                } else if (P.get(0).getExponent() == 1) {
+                    base += P.get(0).getCoefficient() + x;
+                } else if (P.get(0).getExponent() == 0) {
+                    base += P.get(0).getCoefficient();
+                }
+            }else {
                 if (P.get(i).getExponent() > 1) {
                     base += "+" + P.get(i).getCoefficient() + xponent + P.get(i).getExponent();
                 } else if (P.get(i).getExponent() == 1) {
@@ -149,6 +150,7 @@ public class PolynomialImp implements Polynomial {
                 } else if (P.get(i).getExponent() == 0) {
                     base += "+" + P.get(i).getCoefficient();
                 }
+            }
         }
         return base;
     }
