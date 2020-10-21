@@ -1,5 +1,7 @@
 public interface Polynomial extends Iterable<Term> {
 
+	public boolean equals(Polynomial P2);
+
 	public String toString();
 
 	public String getString();

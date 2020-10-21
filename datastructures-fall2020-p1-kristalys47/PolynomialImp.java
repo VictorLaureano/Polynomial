@@ -2,6 +2,8 @@ import edu.uprm.cse.ds.list.ArrayList;
 
 import java.util.Iterator;
 
+import static org.junit.Assert.assertTrue;
+
 public class PolynomialImp implements Polynomial {
     private ArrayList<Term> elements;
     private int size = 0;
@@ -12,15 +14,8 @@ public class PolynomialImp implements Polynomial {
 
         this.polynomial = polynomial;
         polytoArray(this.polynomial);
-        size = elements.size();
+        size = this.elements.size();
 
-        for (int i = 0; i < elements.size(); i++) {
-            if (elements.get(i).getExponent() == 0) {
-                capacity++;
-            }
-            capacity = capacity + 2;
-
-        }
 
 
     }//My methods
@@ -38,7 +33,7 @@ public class PolynomialImp implements Polynomial {
     @Override
     public Term getElement(int i) { //Gets element on position i.
         return this.elements.get(i);
-    }
+    } //Gives element in the list.
 
     private boolean isUnique(int exponent, ArrayList<Term> P) {//Checks if this exponent is found in Array.
         for (int i = 0; i < P.size(); i++) {
@@ -154,7 +149,23 @@ public class PolynomialImp implements Polynomial {
         }
         return base;
     }
+    @Override
+    public boolean equals(Polynomial P2){ //Fixed Equals Method.
+        if(P2.getSize()!=this.size){
+            return false;
+        }
+        for(int i =0 ; i<this.getSize();i++) {
+            if(this.elements.get(i).getCoefficient()!=(P2).getElement(i).getCoefficient()){
+                return false;
+            }
+            if(this.elements.get(i).getExponent()!=(P2).getElement(i).getExponent()){
+                return false;
+            }
 
+        }
+        return true;
+    }
+    //Assigned Methods.
     @Override
     public Polynomial add(Polynomial P2) { //Appends target polynomial with parameter polynomial, then adds it.
         ArrayList<Term> newPoly = new ArrayList<>();
@@ -253,19 +264,13 @@ public class PolynomialImp implements Polynomial {
 
     @Override
     public double definiteIntegral(double a, double b) {//Uses last method to calculate the Definite Integral.
-            ArrayList<Term> newPoly = new ArrayList<>();
-            for (int i = 0; i < this.elements.size(); i++) {
-                newPoly.add(new TermImp((this.elements.get(i).getCoefficient())/(this.elements.get(i).getExponent()+1),this.elements.get(i).getExponent()+1));
-            }
-            newPoly.add(new TermImp(1, 0));
-            PolynomialImp result = new PolynomialImp(getString(newPoly));
-            return result.evaluate(b) - result.evaluate(a);
+            return (this.indefiniteIntegral().evaluate(b) - this.indefiniteIntegral().evaluate(a));
         }
 
 
     @Override
     public int degree() { //Gets the highest degree (Uses for loop to get it in case the use does not put the highest degree first).
-        int max_deg = this.elements.get(0).getExponent();
+        int max_deg = this.elements.get(0).getExponent(); //temp degree
         for (int i = 0; i < this.elements.size(); i++) {
             if (this.elements.get(i).getExponent() > max_deg) {
                 max_deg = this.elements.get(i).getExponent();
@@ -284,8 +289,8 @@ public class PolynomialImp implements Polynomial {
     }
 
     @Override
-    public Iterator<Term> iterator() {
-        return null;
+    public Iterator<Term> iterator() { //iterates through the list.
+        return this.elements.iterator();
     }
 
     @Override
